@@ -19,7 +19,7 @@ paths:
           MessageBody: $request.body
           QueueUrl: !Ref InputQueue
         responses:
-          "2\\d{2}":
+          default:
             statusCode: 201
             responseTemplates :
               "application/json" : '{"message": "This is response message"}'
