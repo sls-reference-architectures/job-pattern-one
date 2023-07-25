@@ -4,7 +4,10 @@
   "description": "Job pattern with API Gateway direct to SQS",
   "main": ".eslintrc.js",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "lint": "eslint .",
+    "lint:fix": "eslint '**.*.js' --fix",
+    "test": "npm run lint && npm run test:unit",
+    "test:unit": "npx jest unit.test --config jest.config.js --silent"
   },
   "keywords": [],
   "author": "",
