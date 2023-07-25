@@ -1,12 +1,16 @@
 openapi: "3.0.1"
 info:
-  title: Using SQS to buffer Create Job requests
+  title: Job Service
 paths:
   "/jobs":
     post:
       responses:
         default:
           description: Successful operation
+        "2\\d{2}":
+          statusCode: 201
+          responseTemplates :
+            "application/json" : "#set ($root=$input.path('$')) { \"stage\": \"$root.name\", \"user-id\": \"$root.key\" }"
       x-amazon-apigateway-integration:
         integrationSubtype: SQS-SendMessage
         credentials: !GetAtt HttpApiRole.Arn
