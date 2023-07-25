@@ -2,6 +2,6 @@ const baseConfig = require('./jest.config');
 
 module.exports = {
   ...baseConfig,
-  globalSetup: './common/jest.setup',
+  globalSetup: './common/jest.e2e.setup',
   testTimeout: 450000,
 };

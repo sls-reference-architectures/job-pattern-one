@@ -13,6 +13,12 @@ paths:
         requestParameters:
           MessageBody: $request.body
           QueueUrl: !Ref InputQueue
+        responses:
+          "200":
+            statusCode: 201
+            responseTemplates :
+              "application/json" : "#set ($root=$input.path('$')) { \"stage\": \"$root.name\", \"user-id\": \"$root.key\" }",
+              "application/xml" : "#set ($root=$input.path('$')) <stage>$root.name</stage> "
         payloadFormatVersion: "1.0"
         type: aws_proxy
         connectionType: INTERNET
