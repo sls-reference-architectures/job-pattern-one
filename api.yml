@@ -1,0 +1,18 @@
+openapi: "3.0.1"
+info:
+  title: Using SQS to buffer Create Job requests
+paths:
+  "/jobs":
+    post:
+      responses:
+        default:
+          description: Successful operation
+      x-amazon-apigateway-integration:
+        integrationSubtype: SQS-SendMessage
+        credentials: !GetAtt HttpApiRole.Arn
+        requestParameters:
+          MessageBody: $request.body
+          QueueUrl: !Ref InputQueue
+        payloadFormatVersion: "1.0"
+        type: aws_proxy
+        connectionType: INTERNET

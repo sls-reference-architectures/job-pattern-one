@@ -1,0 +1,80 @@
+service: job-pattern-one
+
+frameworkVersion: ^3
+
+configValidationMode: error
+
+provider:
+  architecture: arm64
+  deploymentBucket:
+    name: com.reference-architecture.deploys
+    maxPreviousDeploymentArtifacts: 5
+    serverSideEncryption: AES256
+  logRetentionInDays: 7
+  name: aws
+  runtime: nodejs18.x
+  stage: ${opt:stage, 'dev'}
+  tags:
+    lumigo:auto-trace: 'true'
+
+functions:
+  saveJob:
+    handler: jobs/handlers/saveJob.default
+    events:
+    - sqs:
+        arn: !GetAtt InputQueue.Arn
+
+custom:
+  esbuild:
+    minify: true
+  prune:
+    automatic: true
+    number: 1
+
+resources:
+  Resources:
+    InputQueue:
+      Type: AWS::SQS::Queue
+
+    HttpApi:
+      Type: AWS::ApiGatewayV2::Api
+      Properties:
+        Body: ${file(./api.yml)}
+
+    HttpApiStage:
+      Type: AWS::ApiGatewayV2::Stage
+      Properties:
+        ApiId: !Ref HttpApi
+        StageName: $default
+        AutoDeploy: true
+
+    HttpApiRole:
+      Type: AWS::IAM::Role
+      Properties:
+        AssumeRolePolicyDocument:
+          Version: "2012-10-17"
+          Statement:
+          - Effect: Allow
+            Principal:
+              Service: apigateway.amazonaws.com
+            Action:
+            - sts:AssumeRole
+        Policies:
+          - PolicyName: ApiDirectWriteSqs
+            PolicyDocument: 
+              Version: "2012-10-17"
+              Statement:
+                Action:
+                - sqs:SendMessage
+                Effect: Allow
+                Resource:
+                - !GetAtt InputQueue.Arn
+  Outputs:
+    ApiEndpoint:
+      Description: HTTP API endpoint URL
+      Value: !Sub https://${HttpApi}.execute-api.${AWS::Region}.amazonaws.com
+plugins:
+- serverless-esbuild
+- serverless-iam-roles-per-function
+- serverless-deployment-bucket
+- serverless-prune-plugin
