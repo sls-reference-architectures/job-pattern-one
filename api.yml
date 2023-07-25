@@ -7,8 +7,7 @@ paths:
       responses:
         # default:
         #   description: Successful operation
-        "2\\d{2}":
-          statusCode: 201
+        "201":
           description: Successful operation
           # responseTemplates :
           #   "application/json" : "#set ($root=$input.path('$')) { \"stage\": \"$root.name\", \"user-id\": \"$root.key\" }"
