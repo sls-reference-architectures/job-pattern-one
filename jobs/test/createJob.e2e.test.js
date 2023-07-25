@@ -13,7 +13,11 @@ describe('When creating Job', () => {
     const input = { foo: 'bar' };
 
     // ACT
-    const { status } = await axios.post('/jobs', input, requestOptions);
+    const {
+      // data,
+      status,
+    } = await axios.post('/jobs', input, requestOptions);
+    // console.log(data)
 
     // ASSERT
     expect(status).toEqual(201);
