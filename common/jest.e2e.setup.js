@@ -10,6 +10,7 @@ const setup = async () => {
   process.env.API_URL = getApiUrl(stack);
   process.env.AWS_REGION = region;
   process.env.STAGE = stage;
+  process.env.TABLE_NAME = `jobs-${stage}`;
 };
 
 const getApiUrl = (stack) => stack.Outputs?.find((o) => o.OutputKey === 'HttpApiUrl')?.OutputValue;
