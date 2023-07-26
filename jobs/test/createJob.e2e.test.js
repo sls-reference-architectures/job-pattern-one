@@ -13,11 +13,9 @@ describe('When creating Job', () => {
     const input = { foo: 'bar' };
 
     // ACT
-    const {
-      // data,
-      status,
-    } = await axios.post('/jobs', input, requestOptions);
-    // console.log(data)
+    const { data, status } = await axios.post('/jobs', input, requestOptions);
+    // eslint-disable-next-line no-console
+    console.log(data);
 
     // ASSERT
     expect(status).toEqual(201);

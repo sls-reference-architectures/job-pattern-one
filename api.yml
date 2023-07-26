@@ -18,12 +18,17 @@ paths:
           MessageBody: $request.body
           QueueUrl: !Ref InputQueue
         responses:
-          "2\\d{2}":
-            statusCode: "201"
-            responseTemplates :
-              "application/json" : '{"message": "This is response message"}'
+          # "2\\d{2}":
+          #   statusCode: "201"
+          #   responseTemplates :
+          #     "application/json" : '{"message": "This is response message"}'
               # "application/json" : "#set ($root=$input.path('$')) { \"stage\": \"$root.name\", \"user-id\": \"$root.key\" }"
+          default:
+            statusCode: "202"
+            responseTemplates:
+              application/json: '{"message": "Products sent for processing"}'
         payloadFormatVersion: "1.0"
         # type: aws_proxy
         type: AWS
+        httpMethod: POST
         connectionType: INTERNET
