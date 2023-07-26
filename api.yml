@@ -5,10 +5,10 @@ paths:
   "/jobs":
     post:
       responses:
-        # default:
-        #   description: Successful operation
-        "201":
+        default:
           description: Successful operation
+        # "201":
+        #   description: Successful operation
           # responseTemplates :
           #   "application/json" : "#set ($root=$input.path('$')) { \"stage\": \"$root.name\", \"user-id\": \"$root.key\" }"
       x-amazon-apigateway-integration:
@@ -18,7 +18,7 @@ paths:
           MessageBody: $request.body
           QueueUrl: !Ref InputQueue
         responses:
-          default:
+          "2\\d{2}":
             statusCode: "201"
             responseTemplates :
               "application/json" : '{"message": "This is response message"}'

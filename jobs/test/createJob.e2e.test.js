@@ -1,7 +1,7 @@
 import axios from 'axios';
 
 describe('When creating Job', () => {
-  it.skip('should return 201', async () => {
+  it('should return 201', async () => {
     // ARRANGE
     const requestOptions = {
       baseURL: process.env.API_URL,
