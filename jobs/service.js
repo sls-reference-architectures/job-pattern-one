@@ -16,8 +16,9 @@ const kvRepo = new KeyValueRepository({
 export const createJob = async ({ phrase, name }) => {
   const job = {
     id: ulid(),
-    phrase,
     name,
+    phrase,
+    status: 'Pending',
     ttl: calculateTimeToLive({ numberOfDays: 5 }),
   };
   const result = await kvRepo.create(job);

@@ -20,4 +20,24 @@ describe('When creating Job', () => {
     // ASSERT
     expect(status).toEqual(201);
   });
+
+  it('should return the newly-created Job', async () => {
+    // ARRANGE
+    const requestOptions = {
+      baseURL: process.env.API_URL,
+      headers: {
+        'Content-Type': 'application/json',
+      },
+    };
+    const input = createRandomCreateJobInput();
+
+    // ACT
+    const { data: job } = await axios.post('/jobs', input, requestOptions);
+
+    // ASSERT
+    expect(job.name).toEqual(input.name);
+    expect(job.phrase).toEqual(input.phrase);
+    expect(job.id).toBeString();
+    expect(job.status).toEqual('Pending');
+  });
 });
