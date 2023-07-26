@@ -10,12 +10,10 @@ describe('When creating Job', () => {
       },
       validateStatus: () => true,
     };
-    const input = { foo: 'bar' };
+    const input = { phrase: 'foo', name: 'Smith' };
 
     // ACT
-    const { data, status } = await axios.post('/jobs', input, requestOptions);
-    // eslint-disable-next-line no-console
-    console.log(data);
+    const { status } = await axios.post('/jobs', input, requestOptions);
 
     // ASSERT
     expect(status).toEqual(201);

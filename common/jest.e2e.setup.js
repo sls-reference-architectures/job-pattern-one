@@ -7,13 +7,12 @@ const stage = process.env.STAGE || 'dev';
 const setup = async () => {
   const stackName = `job-pattern-one-${stage}`;
   const stack = await getStack(stackName);
-  process.env.API_URL = getApiEndpoint(stack);
+  process.env.API_URL = getApiUrl(stack);
   process.env.AWS_REGION = region;
   process.env.STAGE = stage;
 };
 
-const getApiEndpoint = (stack) =>
-  stack.Outputs?.find((o) => o.OutputKey === 'ApiEndpoint')?.OutputValue;
+const getApiUrl = (stack) => stack.Outputs?.find((o) => o.OutputKey === 'HttpApiUrl')?.OutputValue;
 const getStack = async (stackName) => {
   const cf = new CloudFormationClient({ region });
   const stackResult = await cf.send(

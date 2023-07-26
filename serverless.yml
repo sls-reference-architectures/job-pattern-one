@@ -10,6 +10,8 @@ provider:
     name: com.reference-architecture.deploys
     maxPreviousDeploymentArtifacts: 5
     serverSideEncryption: AES256
+  environment:
+    TABLE_NAME: ${self:custom.tableName}
   logRetentionInDays: 7
   name: aws
   runtime: nodejs18.x
@@ -28,7 +30,6 @@ functions:
     - Effect: Allow
       Action: dynamodb:PutItem
       Resource: !GetAtt JobsTable.Arn
-
 
 custom:
   esbuild:
@@ -55,6 +56,9 @@ resources:
           AttributeType: S
         StreamSpecification:
           StreamViewType: NEW_AND_OLD_IMAGES
+        TimeToLiveSpecification:
+          AttributeName: ttl
+          Enabled: True
 
 plugins:
 - serverless-esbuild
