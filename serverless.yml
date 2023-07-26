@@ -18,11 +18,17 @@ provider:
     lumigo:auto-trace: 'true'
 
 functions:
-  saveJob:
+  createJob:
     handler: jobs/handlers/saveJob.default
     events:
-    - sqs:
-        arn: !GetAtt InputQueue.Arn
+    - httpApi:
+        method: POST
+        path: /jobs
+    iamRoleStatements:
+    - Effect: Allow
+      Action: dynamodb:PutItem
+      Resource: !GetAtt JobsTable.Arn
+
 
 custom:
   esbuild:
@@ -34,43 +40,6 @@ custom:
 
 resources:
   Resources:
-    InputQueue:
-      Type: AWS::SQS::Queue
-
-    HttpApi:
-      Type: AWS::ApiGatewayV2::Api
-      Properties:
-        Body: ${file(./api.yml)}
-
-    HttpApiStage:
-      Type: AWS::ApiGatewayV2::Stage
-      Properties:
-        ApiId: !Ref HttpApi
-        StageName: $default
-        AutoDeploy: true
-
-    HttpApiRole:
-      Type: AWS::IAM::Role
-      Properties:
-        AssumeRolePolicyDocument:
-          Version: "2012-10-17"
-          Statement:
-          - Effect: Allow
-            Principal:
-              Service: apigateway.amazonaws.com
-            Action:
-            - sts:AssumeRole
-        Policies:
-          - PolicyName: ApiDirectWriteSqs
-            PolicyDocument: 
-              Version: "2012-10-17"
-              Statement:
-                Action:
-                - sqs:SendMessage
-                Effect: Allow
-                Resource:
-                - !GetAtt InputQueue.Arn
-  
     JobsTable:
       Type: AWS::DynamoDB::Table
       Properties:
@@ -86,11 +55,7 @@ resources:
           AttributeType: S
         StreamSpecification:
           StreamViewType: NEW_AND_OLD_IMAGES
-  
-  Outputs:
-    ApiEndpoint:
-      Description: HTTP API endpoint URL
-      Value: !Sub https://${HttpApi}.execute-api.${AWS::Region}.amazonaws.com
+
 plugins:
 - serverless-esbuild
 - serverless-iam-roles-per-function
