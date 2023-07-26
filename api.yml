@@ -28,7 +28,7 @@ paths:
             responseTemplates:
               application/json: '{"message": "Products sent for processing"}'
         payloadFormatVersion: "1.0"
-        # type: aws_proxy
-        type: AWS
-        httpMethod: POST
+        type: aws_proxy
+        # type: AWS
+        # httpMethod: POST
         connectionType: INTERNET
