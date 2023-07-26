@@ -24,5 +24,6 @@ paths:
               "application/json" : '{"message": "This is response message"}'
               # "application/json" : "#set ($root=$input.path('$')) { \"stage\": \"$root.name\", \"user-id\": \"$root.key\" }"
         payloadFormatVersion: "1.0"
-        type: aws_proxy
+        # type: aws_proxy
+        type: AWS
         connectionType: INTERNET
