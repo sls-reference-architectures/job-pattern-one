@@ -1,8 +1,15 @@
 import axios from 'axios';
 
-import { createRandomCreateJobInput } from './utils';
+import { createRandomCreateJobInput } from './staticTestHelpers';
+import JobDbTestHelpers from './dbTestHelpers';
 
 describe('When creating Job', () => {
+  const dbTestHelpers = new JobDbTestHelpers();
+
+  afterAll(async () => {
+    await dbTestHelpers.teardown();
+  });
+
   it('should return 201', async () => {
     // ARRANGE
     const requestOptions = {
@@ -33,6 +40,7 @@ describe('When creating Job', () => {
 
     // ACT
     const { data: job } = await axios.post('/jobs', input, requestOptions);
+    dbTestHelpers.trackForTeardown(job.id);
 
     // ASSERT
     expect(job.name).toEqual(input.name);
