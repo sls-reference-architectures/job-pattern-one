@@ -21,7 +21,7 @@ provider:
 
 functions:
   createJob:
-    handler: jobs/handlers/saveJob.default
+    handler: jobs/handlers/createJob.default
     events:
     - httpApi:
         method: POST
