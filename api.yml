@@ -19,7 +19,7 @@ paths:
           QueueUrl: !Ref InputQueue
         responses:
           default:
-            statusCode: 201
+            statusCode: "201"
             responseTemplates :
               "application/json" : '{"message": "This is response message"}'
               # "application/json" : "#set ($root=$input.path('$')) { \"stage\": \"$root.name\", \"user-id\": \"$root.key\" }"
