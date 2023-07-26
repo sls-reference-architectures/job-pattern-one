@@ -30,6 +30,7 @@ custom:
   prune:
     automatic: true
     number: 1
+  tableName: jobs-${sls:stage}
 
 resources:
   Resources:
@@ -69,6 +70,23 @@ resources:
                 Effect: Allow
                 Resource:
                 - !GetAtt InputQueue.Arn
+  
+    JobsTable:
+      Type: AWS::DynamoDB::Table
+      Properties:
+        BillingMode: PAY_PER_REQUEST
+        TableName: ${self:custom.tableName}
+        ContributorInsightsSpecification:
+          Enabled: true
+        KeySchema:
+        - AttributeName: id
+          KeyType: HASH
+        AttributeDefinitions:
+        - AttributeName: id
+          AttributeType: S
+        StreamSpecification:
+          StreamViewType: NEW_AND_OLD_IMAGES
+  
   Outputs:
     ApiEndpoint:
       Description: HTTP API endpoint URL
