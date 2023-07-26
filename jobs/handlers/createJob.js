@@ -11,7 +11,7 @@ const createJob = async (event) => {
   const { body } = event;
   const result = await service.createJob(body);
 
-  return result;
+  return { statusCode: 201, body: JSON.stringify(result) };
 };
 
 export default middy(createJob)

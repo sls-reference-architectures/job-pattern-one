@@ -1,5 +1,7 @@
 import axios from 'axios';
 
+import { createRandomCreateJobInput } from './utils';
+
 describe('When creating Job', () => {
   it('should return 201', async () => {
     // ARRANGE
@@ -10,7 +12,7 @@ describe('When creating Job', () => {
       },
       validateStatus: () => true,
     };
-    const input = { phrase: 'foo', name: 'Smith' };
+    const input = createRandomCreateJobInput();
 
     // ACT
     const { status } = await axios.post('/jobs', input, requestOptions);
