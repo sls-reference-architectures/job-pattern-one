@@ -14,6 +14,12 @@ export default class JobDbTestHelpers {
     });
   }
 
+  async getJob(jobId) {
+    const job = await this.repo.get(jobId);
+
+    return job;
+  }
+
   async teardown() {
     const deletePromises = this.createdJobIds.map((id) => this.repo.remove(id));
     await Promise.all(deletePromises);
