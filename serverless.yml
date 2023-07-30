@@ -34,6 +34,7 @@ functions:
 custom:
   esbuild:
     minify: true
+  eventBusName: jobs-${sls:stage}
   prune:
     automatic: true
     number: 1
@@ -59,7 +60,10 @@ resources:
         TimeToLiveSpecification:
           AttributeName: ttl
           Enabled: True
-
+    JobsEventBus:
+      Type: AWS::Events::EventBus
+      Properties:
+        Name: ${self:custom.eventBusName}
 plugins:
 - serverless-esbuild
 - serverless-iam-roles-per-function

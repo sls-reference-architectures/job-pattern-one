@@ -4,7 +4,7 @@ import retry from 'async-retry';
 import { createRandomCreateJobInput } from './staticTestHelpers';
 import JobDbTestHelpers from './dbTestHelpers';
 
-describe('When creating Job', () => {
+describe('When creating a Job', () => {
   const dbTestHelpers = new JobDbTestHelpers();
 
   afterAll(async () => {
