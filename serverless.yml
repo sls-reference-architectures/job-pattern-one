@@ -48,7 +48,7 @@ functions:
     handler: jobs/handlers/onJobCreated.default
     events:
     - eventBridge:
-        eventBus: !GetAtt JobsEventBus.Arn
+        eventBus: !GetAtt JobsEventBus.Name
         pattern:
           source:
           - job
