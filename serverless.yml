@@ -12,6 +12,7 @@ provider:
     serverSideEncryption: AES256
   environment:
     TABLE_NAME: ${self:custom.tableName}
+    EVENT_BUS_NAME: ${self:custom.eventBusName}
   logRetentionInDays: 7
   name: aws
   runtime: nodejs18.x
