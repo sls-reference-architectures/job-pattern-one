@@ -11,8 +11,9 @@ provider:
     maxPreviousDeploymentArtifacts: 5
     serverSideEncryption: AES256
   environment:
-    TABLE_NAME: ${self:custom.tableName}
     EVENT_BUS_NAME: ${self:custom.eventBusName}
+    TABLE_NAME: ${self:custom.tableName}
+    TRANSLATE_STATE_MACHINE_ARN: !Ref TranslateStateMachineDash${sls:stage}
   logRetentionInDays: 7
   name: aws
   runtime: nodejs18.x
@@ -57,7 +58,7 @@ functions:
     iamRoleStatements:
     - Effect: Allow
       Action: states:StartExecution
-      Resource: !Ref TranslationStateMachine
+      Resource: !Ref TranslateStateMachineDash${sls:stage}
 
   setJobStatusStarted:
     handler: jobs/handlers/setJobStatusStarted.default
@@ -65,6 +66,7 @@ functions:
     - Effect: Allow
       Action: dynamodb:UpdateItem
       Resource: !GetAtt JobsTable.Arn
+
 custom:
   esbuild:
     minify: true
@@ -73,6 +75,19 @@ custom:
     automatic: true
     number: 1
   tableName: jobs-${sls:stage}
+
+stepFunctions:
+  validate: true
+  stateMachines:
+    translateStateMachine:
+      name: TranslateStateMachine-${sls:stage}
+      definition:
+        StartAt: Set Job Status Started
+        States:
+          Set Job Status Started:
+            Type: Task
+            Resource: !GetAtt setJobStatusStarted.Arn
+            End: true
 
 resources:
   Resources:
@@ -98,19 +113,6 @@ resources:
       Type: AWS::Events::EventBus
       Properties:
         Name: ${self:custom.eventBusName}
-
-stepFunctions:
-  stateMachines:
-    TranslateStateMachine:
-      name: TranslateStateMachine
-      definition:
-        StartAt: Set Job Status Started
-        States:
-          Set Job Status Started:
-            Type: Task
-            Resource: !GetAtt setJobStatusStarted.Arn
-            End: true
-      
 
 plugins:
 - serverless-esbuild
