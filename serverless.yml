@@ -54,11 +54,17 @@ functions:
           - job
           detail-type:
           - create
-    # iamRoleStatements:
-    # - Effect: Allow
-    #   Action: states:StartExecution
-    #   Resource: !Ref TranslationStateMachine
+    iamRoleStatements:
+    - Effect: Allow
+      Action: states:StartExecution
+      Resource: !Ref TranslationStateMachine
 
+  setJobStatusStarted:
+    handler: jobs/handlers/setJobStatusStarted.default
+    iamRoleStatements:
+    - Effect: Allow
+      Action: dynamodb:UpdateItem
+      Resource: !GetAtt JobsTable.Arn
 custom:
   esbuild:
     minify: true
@@ -93,12 +99,17 @@ resources:
       Properties:
         Name: ${self:custom.eventBusName}
 
-# stepFunctions:
-#   stateMachines:
-#     TranslateStateMachine:
-#       name: TranslateStateMachine
-#       definition:
-#         StartAt:
+stepFunctions:
+  stateMachines:
+    TranslateStateMachine:
+      name: TranslateStateMachine
+      definition:
+        StartAt: Set Job Status Started
+        States:
+          Set Job Status Started:
+            Type: Task
+            Resource: !GetAtt setJobStatusStarted.Arn
+            End: true
       
 
 plugins:

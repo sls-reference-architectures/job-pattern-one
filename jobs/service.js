@@ -26,4 +26,7 @@ export const createJob = async ({ phrase, name }) => {
   return result;
 };
 
-export const placeholder = () => {};
+export const setStatus = async ({ job, status }) => {
+  const updatedJob = { ...job, status };
+  await kvRepo.update(updatedJob);
+};
