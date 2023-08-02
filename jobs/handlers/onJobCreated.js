@@ -6,7 +6,7 @@ import * as service from '../service';
 
 const onJobCreated = async (event) => {
   const {
-    detail: { jobId, phrase, name },
+    detail: { id: jobId, phrase, name },
   } = event;
   await service.startStateMachine({ jobId, phrase, name });
 };
