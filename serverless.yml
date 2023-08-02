@@ -90,27 +90,27 @@ custom:
     number: 1
   tableName: jobs-${sls:stage}
 
-# stepFunctions:
-#   validate: true
-#   stateMachines:
-#     translateStateMachine:
-#       type: EXPRESS
-#       name: TranslateStateMachine-${sls:stage}
-#       definition:
-#         StartAt: Set Job Status Started
-#         States:
-#           Set Job Status Started:
-#             Type: Task
-#             Resource: !GetAtt setJobStatusStarted.Arn
-#             Next: Translate Phrase
-#           Translate Phrase:
-#             Type: Task
-#             Resource: !GetAtt translatePhrase.Arn
-#             Next: Set Job Status Completed
-#           Set Job Status Completed:
-#             Type: Task
-#             Resource: !GetAtt setJobStatusComplete.Arn
-#             End: true
+stepFunctions:
+  validate: true
+  stateMachines:
+    translateStateMachine:
+      type: EXPRESS
+      name: TranslateStateMachineXXX-${sls:stage}
+      definition:
+        StartAt: Set Job Status Started
+        States:
+          Set Job Status Started:
+            Type: Task
+            Resource: !GetAtt setJobStatusStarted.Arn
+            Next: Translate Phrase
+          Translate Phrase:
+            Type: Task
+            Resource: !GetAtt translatePhrase.Arn
+            Next: Set Job Status Completed
+          Set Job Status Completed:
+            Type: Task
+            Resource: !GetAtt setJobStatusComplete.Arn
+            End: true
 
 resources:
   Resources:
