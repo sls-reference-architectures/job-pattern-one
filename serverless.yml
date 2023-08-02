@@ -65,7 +65,7 @@ functions:
     handler: jobs/handlers/setJobStatusStarted.default
     iamRoleStatements:
     - Effect: Allow
-      Action: dynamodb:UpdateItem
+      Action: dynamodb:PutItem
       Resource: !GetAtt JobsTable.Arn
 
 custom:
