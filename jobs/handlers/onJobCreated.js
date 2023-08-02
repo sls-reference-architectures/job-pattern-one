@@ -6,9 +6,7 @@ import * as service from '../service';
 
 const onJobCreated = async (event) => {
   const { detail: job } = event;
-  const updatedJob = await service.startStateMachine(job);
-
-  return updatedJob;
+  await service.startStateMachine(job);
 };
 
 export default middy(onJobCreated).use(inputOutputLogger(ioLoggerConfig));

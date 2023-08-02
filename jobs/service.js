@@ -29,8 +29,9 @@ export const createJob = async ({ phrase, name }) => {
 };
 
 export const setJobStatus = async ({ job, status }) => {
-  const updatedJob = { ...job, status };
-  await kvRepo.update(updatedJob);
+  const updatedJob = await kvRepo.update({ ...job, status });
+
+  return updatedJob;
 };
 
 export const startStateMachine = async (job) => {
