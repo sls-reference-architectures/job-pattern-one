@@ -73,4 +73,29 @@ describe('When creating a Job', () => {
       { retries: 3 },
     );
   });
+
+  it('should save complete with reversed phrase', async () => {
+    // ARRANGE
+    const requestOptions = {
+      baseURL: process.env.API_URL,
+      headers: {
+        'Content-Type': 'application/json',
+      },
+    };
+    const input = createRandomCreateJobInput({ phrase: 'one two three' });
+
+    // ACT
+    const { data: job } = await axios.post('/jobs', input, requestOptions);
+    dbTestHelpers.trackForTeardown(job.id);
+
+    // ASSERT
+    await retry(
+      async () => {
+        const jobInDb = await dbTestHelpers.getJob(job.id);
+        expect(jobInDb.translatedPhrase).toEqual('eerht owt eno');
+        expect(jobInDb.status).toEqual('Complete');
+      },
+      { retries: 4 },
+    );
+  });
 });

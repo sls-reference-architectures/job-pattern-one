@@ -73,7 +73,7 @@ functions:
   translatePhrase:
     handler: jobs/handlers/translatePhrase.default
 
-  setJobStatusComplete
+  setJobStatusComplete:
     handler: jobs/handlers/setJobStatusComplete.default
     iamRoleStatements:
     - Effect: Allow
