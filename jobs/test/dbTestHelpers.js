@@ -8,7 +8,7 @@ export default class JobDbTestHelpers {
       tableName: process.env.TABLE_NAME,
       keyName: 'id',
       idOptions: {
-        prefix: 'JOB#',
+        prefix: 'JOB_',
       },
       documentClient: getDynamoDbClient(),
     });

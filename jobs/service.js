@@ -10,7 +10,7 @@ const kvRepo = new KeyValueRepository({
   tableName: process.env.TABLE_NAME,
   keyName: 'id',
   idOptions: {
-    prefix: 'JOB#',
+    prefix: 'JOB_',
   },
   documentClient: getDynamoDbClient(),
 });
