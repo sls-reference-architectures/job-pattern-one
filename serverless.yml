@@ -94,6 +94,7 @@ stepFunctions:
   validate: true
   stateMachines:
     translateStateMachine:
+      type: EXPRESS
       name: TranslateStateMachine-${sls:stage}
       definition:
         StartAt: Set Job Status Started
