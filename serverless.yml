@@ -31,7 +31,8 @@ functions:
     - Effect: Allow
       Action: dynamodb:PutItem
       Resource: !GetAtt JobsTable.Arn
-  
+
+  ## Events  
   onDbStreamEvent:
     handler: jobs/handlers/onDbStreamEvent.default
     events:
@@ -61,12 +62,16 @@ functions:
       Action: states:StartExecution
       Resource: !Ref TranslateStateMachineDash${sls:stage}
 
+  ## Step Function Lambdas
   setJobStatusStarted:
     handler: jobs/handlers/setJobStatusStarted.default
     iamRoleStatements:
     - Effect: Allow
       Action: dynamodb:PutItem
       Resource: !GetAtt JobsTable.Arn
+
+  translatePhrase:
+    handler: jobs/handlers/translatePhrase.default
 
 custom:
   esbuild:
@@ -88,6 +93,10 @@ stepFunctions:
           Set Job Status Started:
             Type: Task
             Resource: !GetAtt setJobStatusStarted.Arn
+            Next: Translate Phrase
+          Translate Phrase:
+            Type: Task
+            Resource: !GetAtt translatePhrase.Arn
             End: true
 
 resources:

@@ -45,3 +45,10 @@ export const startStateMachine = async (job) => {
 
   return response;
 };
+
+export const translatePhrase = (phrase = '') => {
+  // In a real app, this could be a language translate or OCR or whatever. For now, it's a reverse.
+  const reversed = phrase.split('').reverse().join('');
+
+  return reversed;
+};
