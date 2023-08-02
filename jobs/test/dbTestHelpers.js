@@ -1,5 +1,6 @@
 import { KeyValueRepository } from '@setho/dynamodb-repository';
 import getDynamoDbClient from '../../common/dynamoDbClient';
+import { createRandomCreateJobInput } from './staticTestHelpers';
 
 export default class JobDbTestHelpers {
   constructor() {
@@ -12,6 +13,14 @@ export default class JobDbTestHelpers {
       },
       documentClient: getDynamoDbClient(),
     });
+  }
+
+  async createRandomJobInDb(overrideWith) {
+    const job = createRandomCreateJobInput(overrideWith);
+    const returnJob = await this.repo.create(job);
+    this.createdJobIds.push(returnJob.id);
+
+    return returnJob;
   }
 
   async getJob(jobId) {
