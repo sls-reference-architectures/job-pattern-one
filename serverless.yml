@@ -73,6 +73,14 @@ functions:
   translatePhrase:
     handler: jobs/handlers/translatePhrase.default
 
+  setJobStatusComplete
+    handler: jobs/handlers/setJobStatusComplete.default
+    iamRoleStatements:
+    - Effect: Allow
+      Action: dynamodb:PutItem
+      Resource: !GetAtt JobsTable.Arn
+
+
 custom:
   esbuild:
     minify: true
@@ -97,6 +105,10 @@ stepFunctions:
           Translate Phrase:
             Type: Task
             Resource: !GetAtt translatePhrase.Arn
+            Next: Set Job Status Completed
+          Set Job Status Completed:
+            Type: Task
+            Resource: !GetAtt setJobStatusComplete.Arn
             End: true
 
 resources:
