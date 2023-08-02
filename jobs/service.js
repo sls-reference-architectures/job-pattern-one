@@ -33,10 +33,10 @@ export const setJobStatus = async ({ job, status }) => {
   await kvRepo.update(updatedJob);
 };
 
-export const startStateMachine = async ({ jobId, phrase, name }) => {
-  const executionName = `${jobId}-${new Date().getTime()}`;
+export const startStateMachine = async (job) => {
+  const executionName = `${job.id}-${new Date().getTime()}`;
   const command = new StartExecutionCommand({
-    input: JSON.stringify({ jobId, phrase, name }),
+    input: JSON.stringify(job),
     name: executionName,
     stateMachineArn: process.env.TRANSLATE_STATE_MACHINE_ARN,
   });
