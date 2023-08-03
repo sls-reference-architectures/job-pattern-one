@@ -47,8 +47,8 @@ functions:
 
   onJobCreated:
     handler: jobs/handlers/onJobCreated.default
-    # environment:
-    #   TRANSLATE_STATE_MACHINE_ARN: !Ref TranslateStateMachineDash${sls:stage}
+    environment:
+      TRANSLATE_STATE_MACHINE_ARN: !Ref TranslateStateMachineDash${sls:stage}
     events:
     - eventBridge:
         eventBus: !GetAtt JobsEventBus.Name
@@ -57,10 +57,10 @@ functions:
           - job
           detail-type:
           - create
-    # iamRoleStatements:
-    # - Effect: Allow
-    #   Action: states:StartExecution
-    #   Resource: !Ref TranslateStateMachineDash${sls:stage}
+    iamRoleStatements:
+    - Effect: Allow
+      Action: states:StartExecution
+      Resource: !Ref TranslateStateMachineDash${sls:stage}
 
   ## Step Function Lambdas
   setJobStatusStarted:
@@ -95,7 +95,7 @@ stepFunctions:
   stateMachines:
     translateStateMachine:
       type: EXPRESS
-      name: TranslateStateMachineXXX-${sls:stage}
+      name: TranslateStateMachine-${sls:stage}
       definition:
         StartAt: Set Job Status Started
         States:
