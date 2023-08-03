@@ -94,8 +94,13 @@ stepFunctions:
   validate: true
   stateMachines:
     translateStateMachine:
-      type: EXPRESS
       name: TranslateStateMachine-${sls:stage}
+      type: EXPRESS
+      loggingConfig:
+        level: ALL
+        includeExecutionData: false
+        destinations: 
+        - !GetAtt TranslateStateMachineLogGroup.Arn
       definition:
         StartAt: Set Job Status Started
         States:
@@ -136,7 +141,10 @@ resources:
       Type: AWS::Events::EventBus
       Properties:
         Name: ${self:custom.eventBusName}
-
+    TranslateStateMachineLogGroup:
+      Type: AWS::Logs::LogGroup
+      Properties:
+        LogGroupName: !Join ['/', [stepfunctions, TranslateStateMachineDash${sls:stage}]]
 plugins:
 - serverless-esbuild
 - serverless-iam-roles-per-function
