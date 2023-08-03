@@ -5,12 +5,12 @@ const region = process.env.AWS_REGION || 'us-east-1';
 const stage = process.env.STAGE || 'dev';
 
 const setup = async () => {
-  const stackName = `job-pattern-one-${stage}`;
+  const stackName = 'job-pattern-one';
   const stack = await getStack(stackName);
   process.env.API_URL = getApiUrl(stack);
   process.env.AWS_REGION = region;
   process.env.STAGE = stage;
-  process.env.TABLE_NAME = `jobs-${stage}`;
+  process.env.TABLE_NAME = stackName;
 };
 
 const getApiUrl = (stack) => stack.Outputs?.find((o) => o.OutputKey === 'HttpApiUrl')?.OutputValue;
