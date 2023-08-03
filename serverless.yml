@@ -150,7 +150,7 @@ stepFunctions:
               ResultPath: $.error
               Next: Set Job Status Failed
             End: true
-          Set Job State Failed:
+          Set Job Status Failed:
             Type: Task
             Resource: !GetAtt setJobStatusFailed.Arn
             Next: Fail
