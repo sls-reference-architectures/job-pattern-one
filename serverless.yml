@@ -57,10 +57,10 @@ functions:
           - job
           detail-type:
           - create
-    iamRoleStatements:
-    - Effect: Allow
-      Action: states:StartExecution
-      Resource: !Ref TranslateStateMachineDash${sls:stage}
+    # iamRoleStatements:
+    # - Effect: Allow
+    #   Action: states:StartExecution
+    #   Resource: !Ref TranslateStateMachineDash${sls:stage}
 
   ## Step Function Lambdas
   setJobStatusStarted:
