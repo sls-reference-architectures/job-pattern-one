@@ -20,6 +20,15 @@ provider:
   tags:
     lumigo:auto-trace: 'true'
 
+custom:
+  esbuild:
+    minify: true
+  eventBusName: ${self:service}
+  prune:
+    automatic: true
+    number: 1
+  tableName: ${self:service}
+
 functions:
   createJob:
     handler: jobs/handlers/createJob.default
@@ -86,16 +95,6 @@ functions:
     - Effect: Allow
       Action: dynamodb:PutItem
       Resource: !GetAtt JobsTable.Arn
-
-
-custom:
-  esbuild:
-    minify: true
-  eventBusName: jobs-${sls:stage}
-  prune:
-    automatic: true
-    number: 1
-  tableName: jobs-${sls:stage}
 
 stepFunctions:
   validate: true
