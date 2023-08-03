@@ -79,6 +79,13 @@ functions:
     - Effect: Allow
       Action: dynamodb:PutItem
       Resource: !GetAtt JobsTable.Arn
+      
+  setJobStatusFailed:
+    handler: jobs/handlers/setJobStatusFailed.default
+    iamRoleStatements:
+    - Effect: Allow
+      Action: dynamodb:PutItem
+      Resource: !GetAtt JobsTable.Arn
 
 
 custom:
@@ -107,15 +114,48 @@ stepFunctions:
           Set Job Status Started:
             Type: Task
             Resource: !GetAtt setJobStatusStarted.Arn
+            Retry:
+            - ErrorEquals: [States.ALL]
+              IntervalSeconds: 2
+              MaxAttempts: 3
+              BackoffRate: 2
+            Catch:
+            - ErrorEquals: [States.ALL]
+              ResultPath: $.error
+              Next: Set Job Status Failed
             Next: Translate Phrase
           Translate Phrase:
             Type: Task
             Resource: !GetAtt translatePhrase.Arn
+            Retry:
+            - ErrorEquals: [States.ALL]
+              IntervalSeconds: 2
+              MaxAttempts: 3
+              BackoffRate: 2
+            Catch:
+            - ErrorEquals: [States.ALL]
+              ResultPath: $.error
+              Next: Set Job Status Failed
             Next: Set Job Status Completed
           Set Job Status Completed:
             Type: Task
             Resource: !GetAtt setJobStatusComplete.Arn
+            Retry:
+            - ErrorEquals: [States.ALL]
+              IntervalSeconds: 2
+              MaxAttempts: 3
+              BackoffRate: 2
+            Catch:
+            - ErrorEquals: [States.ALL]
+              ResultPath: $.error
+              Next: Set Job Status Failed
             End: true
+          Set Job State Failed:
+            Type: Task
+            Resource: !GetAtt setJobStatusFailed.Arn
+            Next: Fail
+          Fail:
+            Type: Fail
 
 resources:
   Resources:
