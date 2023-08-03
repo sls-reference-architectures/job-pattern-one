@@ -47,8 +47,8 @@ functions:
 
   onJobCreated:
     handler: jobs/handlers/onJobCreated.default
-    environment:
-      TRANSLATE_STATE_MACHINE_ARN: !Ref TranslateStateMachineDash${sls:stage}
+    # environment:
+    #   TRANSLATE_STATE_MACHINE_ARN: !Ref TranslateStateMachineDash${sls:stage}
     events:
     - eventBridge:
         eventBus: !GetAtt JobsEventBus.Name
