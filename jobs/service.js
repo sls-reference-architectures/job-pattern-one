@@ -28,6 +28,12 @@ export const createJob = async ({ phrase, name }) => {
   return result;
 };
 
+export const getJob = async (jobId) => {
+  const result = await kvRepo.get(jobId);
+
+  return result;
+};
+
 export const setJobStatus = async ({ job, status }) => {
   const updatedJob = await kvRepo.update({ ...job, status });
 

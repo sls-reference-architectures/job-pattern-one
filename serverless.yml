@@ -41,6 +41,17 @@ functions:
       Action: dynamodb:PutItem
       Resource: !GetAtt JobsTable.Arn
 
+  getJob:
+    handler: jobs/handlers/getJob.default
+    events:
+    - httpApi:
+        method: GET
+        path: /jobs/{jobId}
+    iamRoleStatements:
+    - Effect: Allow
+      Action: dynamodb:GetItem
+      Resource: !GetAtt JobsTable.Arn
+
   ## Events  
   onDbStreamEvent:
     handler: jobs/handlers/onDbStreamEvent.default
