@@ -12,6 +12,7 @@ concurrency: one-at-a-time-please
 jobs:
   buildDeployTest:
     runs-on: ubuntu-latest
+    # These permissions are needed to interact with GitHub's OIDC Token endpoint.
     permissions:
       id-token: write
       contents: read
@@ -32,13 +33,12 @@ jobs:
         aws-region: us-east-1
         role-to-assume: ${{ secrets.AWS_ROLE_TO_ASSUME }}
         role-session-name: github-actions
-
-    # - name: Run int tests
-    #   run: npm run test:int
-    #   env:
-    #     AWS_ACCESS_KEY_ID: ${{ secrets.AWS_ACCESS_KEY_ID }}
-    #     AWS_SECRET_ACCESS_KEY: ${{ secrets.AWS_SECRET_ACCESS_KEY }}
-    #     AWS_REGION: us-east-1
+    - name: Run int tests
+      run: npm run test:int
+      env:
+        # AWS_ACCESS_KEY_ID: ${{ env.AWS_ACCESS_KEY_ID }}
+        # AWS_SECRET_ACCESS_KEY: ${{ env.AWS_SECRET_ACCESS_KEY }}
+        AWS_REGION: us-east-1
     # - name: Deploy
     #   run: npx sls deploy --conceal
     #   env:
