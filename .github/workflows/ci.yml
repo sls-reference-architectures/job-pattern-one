@@ -35,10 +35,10 @@ jobs:
         role-session-name: github-actions
     - name: Run int tests
       run: npm run test:int
-      env:
+      # env:
         # AWS_ACCESS_KEY_ID: ${{ env.AWS_ACCESS_KEY_ID }}
         # AWS_SECRET_ACCESS_KEY: ${{ env.AWS_SECRET_ACCESS_KEY }}
-        AWS_REGION: us-east-1
+        # AWS_REGION: us-east-1
     # - name: Deploy
     #   run: npx sls deploy --conceal
     #   env:
