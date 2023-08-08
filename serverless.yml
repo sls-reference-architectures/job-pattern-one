@@ -85,6 +85,8 @@ functions:
   ## Step Function Lambdas
   setJobStatusStarted:
     handler: jobs/handlers/setJobStatusStarted.default
+    environment:
+      LUMIGO_STEP_FUNCTION: 'TRUE'
     iamRoleStatements:
     - Effect: Allow
       Action: dynamodb:PutItem
@@ -92,9 +94,13 @@ functions:
 
   translatePhrase:
     handler: jobs/handlers/translatePhrase.default
+    environment:
+      LUMIGO_STEP_FUNCTION: 'TRUE'
 
   setJobStatusComplete:
     handler: jobs/handlers/setJobStatusComplete.default
+    environment:
+      LUMIGO_STEP_FUNCTION: 'TRUE'
     iamRoleStatements:
     - Effect: Allow
       Action: dynamodb:PutItem
@@ -102,6 +108,8 @@ functions:
       
   setJobStatusFailed:
     handler: jobs/handlers/setJobStatusFailed.default
+    environment:
+      LUMIGO_STEP_FUNCTION: 'TRUE'
     iamRoleStatements:
     - Effect: Allow
       Action: dynamodb:PutItem
