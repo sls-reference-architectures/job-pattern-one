@@ -9,13 +9,14 @@ on:
 
 concurrency: one-at-a-time-please
 
+# These permissions are needed to interact with GitHub's OIDC Token endpoint.
+permissions:
+  id-token: write
+  contents: read
+
 jobs:
   buildDeployTest:
     runs-on: ubuntu-latest
-    # These permissions are needed to interact with GitHub's OIDC Token endpoint.
-    permissions:
-      id-token: write
-      contents: read
     steps:
     - uses: actions/checkout@v3
     - name: Use Node.js 18.x
