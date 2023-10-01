@@ -53,7 +53,7 @@
     "@aws-sdk/util-dynamodb": "^3.387.0",
     "@dazn/lambda-powertools-logger": "^1.28.1",
     "@middy/core": "^4.6.4",
-    "@middy/http-error-handler": "^4.6.0",
+    "@middy/http-error-handler": "^4.6.4",
     "@middy/http-event-normalizer": "^4.5.5",
     "@middy/http-json-body-parser": "^4.6.1",
     "@middy/input-output-logger": "^4.6.0",
