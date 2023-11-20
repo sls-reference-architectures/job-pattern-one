@@ -56,7 +56,7 @@
     "@middy/http-error-handler": "^4.6.5",
     "@middy/http-event-normalizer": "^4.6.5",
     "@middy/http-json-body-parser": "^4.6.1",
-    "@middy/input-output-logger": "^4.6.5",
+    "@middy/input-output-logger": "^5.0.2",
     "@setho/dynamodb-repository": "^0.8.7",
     "ulid": "^2.3.0"
   }
