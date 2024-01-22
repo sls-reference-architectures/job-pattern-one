@@ -57,7 +57,7 @@
     "@middy/http-event-normalizer": "^4.6.5",
     "@middy/http-json-body-parser": "^4.7.0",
     "@middy/input-output-logger": "^5.2.3",
-    "@setho/dynamodb-repository": "^0.8.7",
+    "@setho/dynamodb-repository": "^0.9.0",
     "ulid": "^2.3.0"
   }
 }
