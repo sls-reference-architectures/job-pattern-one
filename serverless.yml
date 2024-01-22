@@ -89,7 +89,7 @@ functions:
       LUMIGO_STEP_FUNCTION: 'TRUE'
     iamRoleStatements:
     - Effect: Allow
-      Action: dynamodb:PutItem
+      Action: dynamodb:UpdateItem
       Resource: !GetAtt JobsTable.Arn
 
   translatePhrase:
