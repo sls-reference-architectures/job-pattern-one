@@ -103,7 +103,7 @@ functions:
       LUMIGO_STEP_FUNCTION: 'TRUE'
     iamRoleStatements:
     - Effect: Allow
-      Action: dynamodb:PutItem
+      Action: dynamodb:UpdateItem
       Resource: !GetAtt JobsTable.Arn
       
   setJobStatusFailed:
@@ -112,7 +112,7 @@ functions:
       LUMIGO_STEP_FUNCTION: 'TRUE'
     iamRoleStatements:
     - Effect: Allow
-      Action: dynamodb:PutItem
+      Action: dynamodb:UpdateItem
       Resource: !GetAtt JobsTable.Arn
 
 stepFunctions:
