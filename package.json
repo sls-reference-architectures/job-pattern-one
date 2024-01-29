@@ -46,7 +46,7 @@
     "*.{js,md,ts}": "prettier --write --ignore-path .gitignore"
   },
   "dependencies": {
-    "@aws-sdk/client-dynamodb": "^3.496.0",
+    "@aws-sdk/client-dynamodb": "^3.501.0",
     "@aws-sdk/client-eventbridge": "^3.470.0",
     "@aws-sdk/client-sfn": "^3.484.0",
     "@aws-sdk/lib-dynamodb": "^3.470.0",
