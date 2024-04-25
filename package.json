@@ -16,7 +16,7 @@
   "author": "",
   "license": "ISC",
   "devDependencies": {
-    "@aws-sdk/client-cloudformation": "^3.540.0",
+    "@aws-sdk/client-cloudformation": "^3.556.0",
     "@faker-js/faker": "^8.4.1",
     "@swc/core": "^1.5.0",
     "@swc/jest": "^0.2.36",
@@ -46,7 +46,7 @@
     "*.{js,md,ts}": "prettier --write --ignore-path .gitignore"
   },
   "dependencies": {
-    "@aws-sdk/client-dynamodb": "^3.549.0",
+    "@aws-sdk/client-dynamodb": "^3.556.0",
     "@aws-sdk/client-eventbridge": "^3.556.0",
     "@aws-sdk/client-sfn": "^3.556.0",
     "@aws-sdk/lib-dynamodb": "^3.556.0",
