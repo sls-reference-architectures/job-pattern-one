@@ -47,7 +47,7 @@
   },
   "dependencies": {
     "@aws-sdk/client-dynamodb": "^3.576.0",
-    "@aws-sdk/client-eventbridge": "^3.583.0",
+    "@aws-sdk/client-eventbridge": "^3.592.0",
     "@aws-sdk/client-sfn": "^3.588.0",
     "@aws-sdk/lib-dynamodb": "^3.577.0",
     "@aws-sdk/util-dynamodb": "^3.584.0",
