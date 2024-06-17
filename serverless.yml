@@ -203,6 +203,7 @@ resources:
       Type: AWS::Logs::LogGroup
       Properties:
         LogGroupName: !Join ['/', [stepfunctions, TranslateStateMachine]]
+
 plugins:
 - serverless-esbuild
 - serverless-iam-roles-per-function
