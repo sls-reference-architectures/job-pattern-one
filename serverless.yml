@@ -208,12 +208,11 @@ build:
     minify: true
     exclude:
       - '@aws-sdk/*'
+
 package:
   individually: true
 
 plugins:
-# - serverless-esbuild
 - serverless-iam-roles-per-function
 - serverless-deployment-bucket
-# - serverless-prune-plugin
 - serverless-step-functions
