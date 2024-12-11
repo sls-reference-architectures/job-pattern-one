@@ -29,6 +29,13 @@ custom:
     number: 1
   tableName: ${self:service}
 
+build:
+  esbuild:
+    bundle: true
+    minify: true
+    exclude:
+      - '@aws-sdk/*'
+
 functions:
   createJob:
     handler: jobs/handlers/createJob.default
