@@ -21,20 +21,11 @@ provider:
     lumigo:auto-trace: 'true'
 
 custom:
-  esbuild:
-    minify: true
   eventBusName: ${self:service}
   prune:
     automatic: true
     number: 1
   tableName: ${self:service}
-
-build:
-  esbuild:
-    bundle: true
-    minify: true
-    exclude:
-      - '@aws-sdk/*'
 
 functions:
   createJob:
@@ -210,6 +201,15 @@ resources:
       Type: AWS::Logs::LogGroup
       Properties:
         LogGroupName: !Join ['/', [stepfunctions, TranslateStateMachine]]
+
+build:
+  esbuild:
+    bundle: true
+    minify: true
+    exclude:
+      - '@aws-sdk/*'
+package:
+  individually: true
 
 plugins:
 # - serverless-esbuild
