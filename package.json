@@ -10,7 +10,7 @@
     "test:e2e": "npx jest e2e.test --config jest.config.e2e.js --silent",
     "test:int": "npx jest int.test --config jest.config.int.js --silent",
     "test:unit": "npx jest unit.test --config jest.config.js --silent",
-    "prepare": "husky install"
+    "prepare": "husky"
   },
   "keywords": [],
   "author": "",
