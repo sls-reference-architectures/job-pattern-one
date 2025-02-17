@@ -36,7 +36,6 @@
     "prettier": "^3.5.1",
     "serverless": "^4.4.15",
     "serverless-deployment-bucket": "^1.6.0",
-    "serverless-esbuild": "^1.54.6",
     "serverless-iam-roles-per-function": "^3.2.0",
     "serverless-step-functions": "^3.21.2"
   },

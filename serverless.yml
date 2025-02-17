@@ -204,7 +204,10 @@ resources:
 
 build:
   esbuild:
+    bundle: true
     minify: true
+    exclude:
+      - '@aws-sdk/*'
 
 package:
   individually: true
@@ -213,4 +216,3 @@ plugins:
 - serverless-iam-roles-per-function
 - serverless-deployment-bucket
 - serverless-step-functions
-- serverless-esbuild
