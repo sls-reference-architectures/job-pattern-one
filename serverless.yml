@@ -15,7 +15,7 @@ provider:
     TABLE_NAME: ${self:custom.tableName}
   logRetentionInDays: 7
   name: aws
-  runtime: nodejs20.x
+  runtime: nodejs22.x
   stage: dev
   tags:
     lumigo:auto-trace: 'true'
