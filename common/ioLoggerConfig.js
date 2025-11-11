@@ -1,10 +1,12 @@
 import Logger from '@dazn/lambda-powertools-logger';
 
+// Update this for middy's io logger configuration
 const ioLoggerConfig = {
   awsContext: true,
   logger: (request) => {
     if (isJsonString(request?.body)) {
-      request.response.body = JSON.parse(request.response.body);
+
+      request.response.body = JSON.parse(request.response.body); // eslint-disable-line no-param-reassign
     }
     Logger.debug('In I/O Logger', { request });
   },
@@ -14,7 +16,7 @@ const ioLoggerConfig = {
 const isJsonString = (str) => {
   try {
     JSON.parse(str);
-  } catch (e) {
+  } catch {
     return false;
   }
   return true;
