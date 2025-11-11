@@ -19,7 +19,7 @@
     "@aws-sdk/client-cloudformation": "3.928.0",
     "@eslint/eslintrc": "^3.3.1",
     "@eslint/js": "^9.39.0",
-    "@faker-js/faker": "^9.5.0",
+    "@faker-js/faker": "^10.1.0",
     "@swc/core": "^1.11.24",
     "@swc/jest": "^0.2.37",
     "@types/jest": "^29.5.14",
