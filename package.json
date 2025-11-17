@@ -16,7 +16,7 @@
   "author": "",
   "license": "ISC",
   "devDependencies": {
-    "@aws-sdk/client-cloudformation": "3.928.0",
+    "@aws-sdk/client-cloudformation": "3.932.0",
     "@eslint/eslintrc": "^3.3.1",
     "@eslint/js": "^9.39.0",
     "@faker-js/faker": "^10.1.0",
