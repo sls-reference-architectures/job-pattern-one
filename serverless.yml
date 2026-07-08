@@ -28,6 +28,36 @@ custom:
   tableName: ${self:service}
 
 functions:
+  diagArm64Default:
+    handler: jobs/handlers/diagDefault.default
+    events:
+    - httpApi:
+        method: GET
+        path: /diag/arm64/default
+
+  diagArm64Named:
+    handler: jobs/handlers/diagNamed.handler
+    events:
+    - httpApi:
+        method: GET
+        path: /diag/arm64/named
+
+  diagX64Default:
+    architecture: x86_64
+    handler: jobs/handlers/diagDefault.default
+    events:
+    - httpApi:
+        method: GET
+        path: /diag/x64/default
+
+  diagX64Named:
+    architecture: x86_64
+    handler: jobs/handlers/diagNamed.handler
+    events:
+    - httpApi:
+        method: GET
+        path: /diag/x64/named
+
   createJob:
     handler: jobs/handlers/createJob.default
     events:
