@@ -14,7 +14,7 @@ const createJob = async (event) => {
   return { statusCode: 201, body: JSON.stringify(result) };
 };
 
-export default middy(createJob)
+export const handler = middy(createJob)
   .use(jsonBodyParser())
   .use(eventNormalizer())
   .use(inputOutputLogger(ioLoggerConfig))

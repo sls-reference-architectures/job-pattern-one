@@ -14,4 +14,4 @@ const publishDbEvents = async (event) => {
   await publisher.publish(event);
 };
 
-export default middy(publishDbEvents).use(inputOutputLogger(ioLoggerConfig));
+export const handler = middy(publishDbEvents).use(inputOutputLogger(ioLoggerConfig));

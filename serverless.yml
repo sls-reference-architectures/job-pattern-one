@@ -28,38 +28,8 @@ custom:
   tableName: ${self:service}
 
 functions:
-  diagArm64Default:
-    handler: jobs/handlers/diagDefault.handler
-    events:
-    - httpApi:
-        method: GET
-        path: /diag/arm64/default
-
-  diagArm64Named:
-    handler: jobs/handlers/diagNamed.handler
-    events:
-    - httpApi:
-        method: GET
-        path: /diag/arm64/named
-
-  diagX64Default:
-    architecture: x86_64
-    handler: jobs/handlers/diagDefault.handler
-    events:
-    - httpApi:
-        method: GET
-        path: /diag/x64/default
-
-  diagX64Named:
-    architecture: x86_64
-    handler: jobs/handlers/diagNamed.handler
-    events:
-    - httpApi:
-        method: GET
-        path: /diag/x64/named
-
   createJob:
-    handler: jobs/handlers/createJob.default
+    handler: jobs/handlers/createJob.handler
     events:
     - httpApi:
         method: POST
@@ -70,7 +40,7 @@ functions:
       Resource: !GetAtt JobsTable.Arn
 
   getJob:
-    handler: jobs/handlers/getJob.default
+    handler: jobs/handlers/getJob.handler
     events:
     - httpApi:
         method: GET
@@ -82,7 +52,7 @@ functions:
 
   ## Events  
   onDbStreamEvent:
-    handler: jobs/handlers/onDbStreamEvent.default
+    handler: jobs/handlers/onDbStreamEvent.handler
     events:
     - stream:
         type: dynamodb
@@ -94,7 +64,7 @@ functions:
       Resource: !GetAtt JobsEventBus.Arn
 
   onJobCreated:
-    handler: jobs/handlers/onJobCreated.default
+    handler: jobs/handlers/onJobCreated.handler
     environment:
       TRANSLATE_STATE_MACHINE_ARN: !Ref TranslateStateMachine
     events:
@@ -112,7 +82,7 @@ functions:
 
   ## Step Function Lambdas
   setJobStatusStarted:
-    handler: jobs/handlers/setJobStatusStarted.default
+    handler: jobs/handlers/setJobStatusStarted.handler
     environment:
       LUMIGO_STEP_FUNCTION: 'TRUE'
     iamRoleStatements:
@@ -121,12 +91,12 @@ functions:
       Resource: !GetAtt JobsTable.Arn
 
   translatePhrase:
-    handler: jobs/handlers/translatePhrase.default
+    handler: jobs/handlers/translatePhrase.handler
     environment:
       LUMIGO_STEP_FUNCTION: 'TRUE'
 
   setJobStatusComplete:
-    handler: jobs/handlers/setJobStatusComplete.default
+    handler: jobs/handlers/setJobStatusComplete.handler
     environment:
       LUMIGO_STEP_FUNCTION: 'TRUE'
     iamRoleStatements:
@@ -135,7 +105,7 @@ functions:
       Resource: !GetAtt JobsTable.Arn
       
   setJobStatusFailed:
-    handler: jobs/handlers/setJobStatusFailed.default
+    handler: jobs/handlers/setJobStatusFailed.handler
     environment:
       LUMIGO_STEP_FUNCTION: 'TRUE'
     iamRoleStatements:

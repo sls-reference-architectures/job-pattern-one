@@ -9,4 +9,4 @@ const onJobCreated = async (event) => {
   await service.startStateMachine(job);
 };
 
-export default middy(onJobCreated).use(inputOutputLogger(ioLoggerConfig));
+export const handler = middy(onJobCreated).use(inputOutputLogger(ioLoggerConfig));

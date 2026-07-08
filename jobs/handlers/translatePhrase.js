@@ -11,4 +11,4 @@ const translatePhrase = async (event) => {
   return { ...event, translatedPhrase };
 };
 
-export default middy(translatePhrase).use(inputOutputLogger(ioLoggerConfig));
+export const handler = middy(translatePhrase).use(inputOutputLogger(ioLoggerConfig));

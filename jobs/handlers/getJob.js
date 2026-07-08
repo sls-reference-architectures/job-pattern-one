@@ -15,7 +15,7 @@ const getJob = async (event) => {
   return { statusCode: 200, body: JSON.stringify(result) };
 };
 
-export default middy(getJob)
+export const handler = middy(getJob)
   .use(eventNormalizer())
   .use(inputOutputLogger(ioLoggerConfig))
   .use(errorHandler());

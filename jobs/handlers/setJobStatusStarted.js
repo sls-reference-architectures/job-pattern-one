@@ -10,4 +10,4 @@ const setJobStatusStarted = async (event) => {
   return result;
 };
 
-export default middy(setJobStatusStarted).use(inputOutputLogger(ioLoggerConfig));
+export const handler = middy(setJobStatusStarted).use(inputOutputLogger(ioLoggerConfig));
