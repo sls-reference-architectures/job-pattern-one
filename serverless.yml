@@ -29,7 +29,7 @@ custom:
 
 functions:
   diagArm64Default:
-    handler: jobs/handlers/diagDefault.default
+    handler: jobs/handlers/diagDefault.handler
     events:
     - httpApi:
         method: GET
@@ -44,7 +44,7 @@ functions:
 
   diagX64Default:
     architecture: x86_64
-    handler: jobs/handlers/diagDefault.default
+    handler: jobs/handlers/diagDefault.handler
     events:
     - httpApi:
         method: GET
