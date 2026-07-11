@@ -14,7 +14,7 @@
   },
   "keywords": [],
   "author": "",
-  "license": "ISC",
+  "license": "MIT",
   "devDependencies": {
     "@aws-sdk/client-cloudformation": "3.987.0",
     "@eslint/eslintrc": "^3.3.1",
