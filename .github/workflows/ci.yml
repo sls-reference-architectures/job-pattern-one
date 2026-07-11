@@ -39,3 +39,5 @@ jobs:
         run: npm run test:int
       - name: E2E Test
         run: npm run test:e2e
+      - name: Tear down stack
+        run: npx sls remove --conceal
