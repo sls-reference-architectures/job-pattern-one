@@ -44,7 +44,7 @@
     "*.{js,md,ts}": "npx prettier --write --ignore-path .gitignore"
   },
   "dependencies": {
-    "@aws-sdk/client-dynamodb": "3.987.0",
+    "@aws-sdk/client-dynamodb": "3.1091.0",
     "@aws-sdk/client-eventbridge": "3.987.0",
     "@aws-sdk/client-sfn": "3.1086.0",
     "@aws-sdk/lib-dynamodb": "3.987.0",
