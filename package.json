@@ -52,7 +52,7 @@
     "@dazn/lambda-powertools-logger": "^1.28.1",
     "@middy/core": "^6.4.5",
     "@middy/http-error-handler": "^6.4.5",
-    "@middy/http-event-normalizer": "^6.4.5",
+    "@middy/http-event-normalizer": "^7.7.0",
     "@middy/http-json-body-parser": "^6.4.5",
     "@middy/input-output-logger": "^6.4.5",
     "@setho/dynamodb-repository": "^0.9.0",
