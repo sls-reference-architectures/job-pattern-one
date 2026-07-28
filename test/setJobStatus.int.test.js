@@ -1,7 +1,7 @@
 import { faker } from '@faker-js/faker';
 import retry from 'async-retry';
 
-import * as service from '../service';
+import * as service from '../src/service';
 import JobDbTestHelpers from './dbTestHelpers';
 
 describe('When setting job status', () => {

@@ -3,7 +3,7 @@ import errorHandler from '@middy/http-error-handler';
 import eventNormalizer from '@middy/http-event-normalizer';
 import inputOutputLogger from '@middy/input-output-logger';
 
-import ioLoggerConfig from '../../common/ioLoggerConfig';
+import ioLoggerConfig from '../common/ioLoggerConfig';
 import * as service from '../service';
 
 const getJob = async (event) => {

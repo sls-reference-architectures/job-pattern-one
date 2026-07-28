@@ -27,7 +27,7 @@ custom:
 
 functions:
   createJob:
-    handler: jobs/handlers/createJob.handler
+    handler: src/handlers/createJob.handler
     events:
     - httpApi:
         method: POST
@@ -38,7 +38,7 @@ functions:
       Resource: !GetAtt JobsTable.Arn
 
   getJob:
-    handler: jobs/handlers/getJob.handler
+    handler: src/handlers/getJob.handler
     events:
     - httpApi:
         method: GET
@@ -50,7 +50,7 @@ functions:
 
   ## Events  
   onDbStreamEvent:
-    handler: jobs/handlers/onDbStreamEvent.handler
+    handler: src/handlers/onDbStreamEvent.handler
     events:
     - stream:
         type: dynamodb
@@ -62,7 +62,7 @@ functions:
       Resource: !GetAtt JobsEventBus.Arn
 
   onJobCreated:
-    handler: jobs/handlers/onJobCreated.handler
+    handler: src/handlers/onJobCreated.handler
     environment:
       TRANSLATE_STATE_MACHINE_ARN: !Ref TranslateStateMachine
     events:
@@ -80,7 +80,7 @@ functions:
 
   ## Step Function Lambdas
   setJobStatusStarted:
-    handler: jobs/handlers/setJobStatusStarted.handler
+    handler: src/handlers/setJobStatusStarted.handler
     environment:
       LUMIGO_STEP_FUNCTION: 'TRUE'
     iamRoleStatements:
@@ -89,12 +89,12 @@ functions:
       Resource: !GetAtt JobsTable.Arn
 
   translatePhrase:
-    handler: jobs/handlers/translatePhrase.handler
+    handler: src/handlers/translatePhrase.handler
     environment:
       LUMIGO_STEP_FUNCTION: 'TRUE'
 
   setJobStatusComplete:
-    handler: jobs/handlers/setJobStatusComplete.handler
+    handler: src/handlers/setJobStatusComplete.handler
     environment:
       LUMIGO_STEP_FUNCTION: 'TRUE'
     iamRoleStatements:
@@ -103,7 +103,7 @@ functions:
       Resource: !GetAtt JobsTable.Arn
       
   setJobStatusFailed:
-    handler: jobs/handlers/setJobStatusFailed.handler
+    handler: src/handlers/setJobStatusFailed.handler
     environment:
       LUMIGO_STEP_FUNCTION: 'TRUE'
     iamRoleStatements:

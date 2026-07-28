@@ -5,7 +5,6 @@ const ioLoggerConfig = {
   awsContext: true,
   logger: (request) => {
     if (isJsonString(request?.body)) {
-
       request.response.body = JSON.parse(request.response.body); // eslint-disable-line no-param-reassign
     }
     Logger.debug('In I/O Logger', { request });

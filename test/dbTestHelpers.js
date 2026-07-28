@@ -1,5 +1,5 @@
 import { KeyValueRepository } from '@setho/dynamodb-repository';
-import getDynamoDbClient from '../../common/dynamoDbClient';
+import getDynamoDbClient from '../src/common/dynamoDbClient';
 import { createRandomCreateJobInput } from './staticTestHelpers';
 
 export default class JobDbTestHelpers {

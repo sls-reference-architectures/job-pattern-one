@@ -1,4 +1,4 @@
-import * as service from '../service';
+import * as service from '../src/service';
 
 describe('When translating phrase', () => {
   it('should return reversed string', () => {
