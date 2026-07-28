@@ -17,8 +17,6 @@ provider:
   name: aws
   runtime: nodejs24.x
   stage: dev
-  tags:
-    lumigo:auto-trace: 'true'
 
 custom:
   eventBusName: ${self:service}
