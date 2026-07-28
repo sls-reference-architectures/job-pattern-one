@@ -1,4 +1,6 @@
-import Logger from '@dazn/lambda-powertools-logger';
+import { Logger } from '@aws-lambda-powertools/logger';
+
+const logger = new Logger({ serviceName: 'job-pattern-one' });
 
 // Update this for middy's io logger configuration
 const ioLoggerConfig = {
@@ -7,7 +9,7 @@ const ioLoggerConfig = {
     if (isJsonString(request?.body)) {
       request.response.body = JSON.parse(request.response.body); // eslint-disable-line no-param-reassign
     }
-    Logger.debug('In I/O Logger', { request });
+    logger.debug('In I/O Logger', { request });
   },
 };
 

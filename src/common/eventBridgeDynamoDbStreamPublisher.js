@@ -1,6 +1,8 @@
 import { PutEventsCommand } from '@aws-sdk/client-eventbridge';
 import { unmarshall } from '@aws-sdk/util-dynamodb';
-import Logger from '@dazn/lambda-powertools-logger';
+import { Logger } from '@aws-lambda-powertools/logger';
+
+const logger = new Logger({ serviceName: 'job-pattern-one' });
 
 export default class EventBridgeDynamoDbStreamPublisher {
   constructor({ eventBusName, eventBridgeClient }) {
@@ -17,7 +19,7 @@ export default class EventBridgeDynamoDbStreamPublisher {
       const putEventsCommand = new PutEventsCommand({ Entries: allEntries });
       await this.eventBridgeClient.send(putEventsCommand);
     } catch (err) {
-      Logger.error('Error publishing to EB', { dynamoDbStreamEvent }, err);
+      logger.error('Error publishing to EB', { dynamoDbStreamEvent }, err);
       throw err;
     }
   }
