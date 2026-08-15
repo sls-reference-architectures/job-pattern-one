@@ -32,6 +32,8 @@ functions:
     - httpApi:
         method: POST
         path: /jobs
+        authorizer:
+          type: aws_iam
     iamRoleStatements:
     - Effect: Allow
       Action: dynamodb:PutItem
@@ -43,6 +45,8 @@ functions:
     - httpApi:
         method: GET
         path: /jobs/{jobId}
+        authorizer:
+          type: aws_iam
     iamRoleStatements:
     - Effect: Allow
       Action: dynamodb:GetItem
