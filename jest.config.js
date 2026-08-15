@@ -3,5 +3,5 @@ module.exports = {
   transform: {
     '^.+\\.js?$': '@swc/jest',
   },
-  transformIgnorePatterns: ['/node_modules/?!@faker-js/faker'],
+  transformIgnorePatterns: ['node_modules/(?!@faker-js/faker/)'],
 };
