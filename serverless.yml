@@ -216,5 +216,4 @@ package:
 
 plugins:
 - serverless-iam-roles-per-function
-- serverless-deployment-bucket
 - serverless-step-functions
