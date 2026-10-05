@@ -8,12 +8,14 @@ const setup = async () => {
   const stackName = `${projectName}-${stage}`;
   const stack = await getStack(stackName);
   process.env.API_URL = getApiUrl(stack);
+  process.env.STATE_MACHINE_ARN = getOutput({ stack, key: 'TranslateStateMachineArn' });
   process.env.AWS_REGION = region;
   process.env.STAGE = stage;
   process.env.TABLE_NAME = projectName;
 };
 
 const getApiUrl = (stack) => stack.Outputs?.find((o) => o.OutputKey === 'HttpApiUrl')?.OutputValue;
+const getOutput = ({ stack, key }) => stack.Outputs?.find((o) => o.OutputKey === key)?.OutputValue;
 const getStack = async (stackName) => {
   const cf = new CloudFormationClient({ region });
   const stackResult = await cf.send(
