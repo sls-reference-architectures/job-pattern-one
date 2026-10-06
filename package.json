@@ -43,7 +43,7 @@
     "*.{js,md,ts}": "npx prettier --write --ignore-path .gitignore"
   },
   "dependencies": {
-    "@aws-lambda-powertools/logger": "^2.34.0",
+    "@aws-lambda-powertools/logger": "^2.35.0",
     "@aws-sdk/client-dynamodb": "3.1141.0",
     "@aws-sdk/client-eventbridge": "3.1141.0",
     "@aws-sdk/client-sfn": "3.1141.0",
